@@ -1,0 +1,17 @@
+@inherits Microsoft.VisualStudio.Web.CodeGeneration.Templating.RazorTemplateBase
+using System;
+using System.Collections.Generic;
+using System.Text;
+using FluentValidation;
+using @(Model.Namespace).Application.Command;
+
+namespace @(Model.Namespace).Application.Validation
+{
+    public class @(Model.ClassName)CommandValidation : AbstractValidator<@(Model.ClassName)Command>
+    {
+        public @(Model.ClassName)CommandValidation()
+        {
+            RuleFor(command => command.Name).NotEmpty().WithMessage("\"Name\" field should'nt be empty.");
+        }
+    }
+}

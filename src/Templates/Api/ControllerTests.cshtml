@@ -1,0 +1,40 @@
+@inherits Microsoft.VisualStudio.Web.CodeGeneration.Templating.RazorTemplateBase
+using System;
+using System.Collections.Generic;
+using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
+using MediatR;
+using Microsoft.AspNetCore.Mvc;
+using Moq;
+using @(Model.Namespace).Infrastructure.Api;
+using Xunit;
+
+namespace @(Model.Namespace).UnitTest.Infrastructure.Api
+{
+    public class @(Model.ClassName)ControllerTests
+    {
+        [Fact]
+        public async Task Should_send_SolveCommand_Sync()
+        {
+            await Should_send_SolveCommand((solvedValue) => () => Task.FromResult(solvedValue));
+        }
+        [Fact]
+        public async Task Should_send_SolveCommand_Async()
+        {
+            await Should_send_SolveCommand((solvedValue) => (async () => {
+                await Task.Delay(1);
+                return solvedValue;
+            }));
+        }
+        public async Task Should_send_SolveCommand(Func<double,Func<Task<double>>> solveResult)
+        {
+            var expected = "Thanks";
+            var mediatr = new Mock<IMediator>();
+            var controller = new @(Model.ClassName)Controller(mediatr.Object);
+            var result = await controller.Post("John");
+            Assert.Equal(expected, Assert.IsType<OkObjectResult>(result).Value);
+
+        }
+    }
+}

@@ -1,0 +1,18 @@
+﻿@inherits Microsoft.VisualStudio.Web.CodeGeneration.Templating.RazorTemplateBase
+using MediatR;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+
+namespace @(Model.Namespace).Application.Command
+{
+    public class @(Model.ClassName)Command : IRequest<@(Model.ReturnType)>
+    {
+        public string Name { get; set; }
+        public @(Model.ClassName)Command(string name)
+        {
+            Name = name;
+        }
+    }
+}

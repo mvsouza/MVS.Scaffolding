@@ -1,0 +1,29 @@
+@inherits Microsoft.VisualStudio.Web.CodeGeneration.Templating.RazorTemplateBase
+using @(Model.Namespace).Application.Command;
+using MediatR;
+using Microsoft.AspNetCore.Mvc;
+using System.Net;
+using System.Threading.Tasks;
+
+namespace @(Model.Namespace).Infrastructure.Api
+{
+    [Produces("application/json")]
+    [Route("api/v1/@(Model.ClassName)")]
+    public class  @(Model.ClassName)Controller : ControllerBase
+    {
+        private readonly IMediator _mediator;
+        public @(Model.ClassName)Controller(IMediator mediator)
+        {
+            _mediator = mediator;
+        }
+
+        [HttpPost]
+        [ProducesResponseType((int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
+        [ProducesResponseType((int)HttpStatusCode.NotFound)]
+        public async Task<IActionResult> Post([FromBody]string name)
+        {
+            return (IActionResult)Ok("Thanks");
+        }
+    }
+}

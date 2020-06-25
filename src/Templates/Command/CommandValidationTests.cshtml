@@ -1,0 +1,23 @@
+﻿@inherits Microsoft.VisualStudio.Web.CodeGeneration.Templating.RazorTemplateBase
+using System;
+using System.Collections.Generic;
+using System.Text;
+using @(Model.Namespace).Application.Command;
+using @(Model.Namespace).Application.Validation;
+using Xunit;
+
+namespace @(Model.Namespace).UnitTest.Application.Validation
+{
+    public class @(Model.ClassName)CommandValidationTests
+    {
+        [Fact]
+        public void Should_return_invalid_when_name_is_empty()
+        {
+            var validation = new @(Model.ClassName)CommandValidation();
+            var command = new @(Model.ClassName)Command("");
+            var result = validation.Validate(command);
+            Assert.False(result.IsValid);
+        }
+
+    }
+}

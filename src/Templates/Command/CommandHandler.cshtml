@@ -1,0 +1,15 @@
+﻿@inherits Microsoft.VisualStudio.Web.CodeGeneration.Templating.RazorTemplateBase
+using MediatR;
+using System.Threading;
+using System.Threading.Tasks;
+
+namespace @(Model.Namespace).Application.Command
+{
+    public class @(Model.ClassName)CommandHandler : IRequestHandler<@(Model.ClassName)Command, @(Model.ReturnType)>
+    {
+        public async Task<@(Model.ReturnType)> Handle(@(Model.ClassName)Command command, CancellationToken cancellationToken)
+        {
+            return await Task.FromResult(default(@(Model.ReturnType)));;
+        }
+    }
+}

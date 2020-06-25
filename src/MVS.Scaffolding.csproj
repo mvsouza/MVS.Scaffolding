@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFrameworks>netcoreapp3.1</TargetFrameworks>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration" Version="3.1.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Templates\" Pack="true" PackagePath="Templates\" />
+    <None Remove="Templates\Generetors\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Templates\Generetors\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Remove="Templates\Generetors\**" />
+  </ItemGroup>
+</Project>
