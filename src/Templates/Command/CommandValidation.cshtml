@@ -8,7 +8,7 @@ namespace @(Model.Namespace).Application.Validation
     {
         public @(Model.ClassName)CommandValidation()
         {
-            RuleFor(command => command.Name).NotEmpty().WithMessage("\"Name\" field should'nt be empty.");
+            RuleFor(command => command.Name).NotEmpty().WithMessage("\"Name\" field shouldn't be empty.");
         }
     }
 }
