@@ -9,15 +9,11 @@ nuget Fake.Runtime //"
 
 open Fake.Core
 open Fake.DotNet
-open Fake.DotNet.NuGet
 open Fake.IO
-open Fake.IO.FileSystemOperators
 open Fake.IO.Globbing.Operators
 open Fake.Core.TargetOperators
-open FSharp.Data
-open System
 
-let artifacts = __SOURCE_DIRECTORY__ + "/artifacts"
+let artifacts = __SOURCE_DIRECTORY__ + "/../packages"
 let nugetScaffoldingCache = Path.combineTrimEnd (Environment.environVar "HOME") "/.nuget/packages/mvs.scaffolding";;
 
 
