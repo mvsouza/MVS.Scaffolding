@@ -10,7 +10,6 @@ nuget Fake.Runtime //"
 open Fake.Core
 open Fake.DotNet
 open Fake.DotNet.NuGet
-open Fake.DotNet.Testing
 open Fake.IO
 open Fake.IO.FileSystemOperators
 open Fake.IO.Globbing.Operators
@@ -59,7 +58,6 @@ Target.create "NuGetPush" (fun _ ->
       })
   ))
 )
-
 
 Target.create "Restore" (fun _ ->
     !! "src/**/*.*proj"

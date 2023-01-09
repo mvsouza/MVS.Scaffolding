@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 using System.Threading.Tasks;
+using Microsoft.DotNet.Scaffolding.Shared;
+using Microsoft.DotNet.Scaffolding.Shared.ProjectModel;
 using Microsoft.VisualStudio.Web.CodeGeneration;
-using Microsoft.VisualStudio.Web.CodeGeneration.Contracts.ProjectModel;
 using Microsoft.VisualStudio.Web.CodeGeneration.DotNet;
 using MVS.Scaffolding.Models;
 
@@ -39,14 +40,14 @@ namespace MVS.Scaffolding
                 throw new ArgumentNullException(nameof(model));
 
             if (string.IsNullOrEmpty(model.ClassName))
-                throw new ArgumentException("Please specify the name of the command using --bundleName");
+                throw new ArgumentException("Please specify the bundle name using --bundleName");
             
             var files = GetFiles(model.ClassName);
             foreach (var code in files)
                 if (File.Exists(code.DestinationPath) && !model.Force)
                     throw new InvalidOperationException($"File already exists '{code.DestinationPath}' use -f to force over write.");
             
-            model.Namespace = _applicationInfo.ApplicationName.ReplaceLast(".Infrastructure", "");
+            model.Namespace = Namespace;
             foreach (var code in files)
             {
                 await _codeGeneratorActionsService.AddFileFromTemplateAsync(code.DestinationPath, code.File, TemplateFolders, model);
@@ -57,6 +58,7 @@ namespace MVS.Scaffolding
         public abstract IEnumerable<FileBoilerPlaitModel> GetFiles(string bundleName);
         public abstract string[] GetBaseTemplateFolders();
         public string GeneratedFileExtension => ".cs";
+        public string Namespace => _applicationInfo.ApplicationName.ReplaceLast(".Infrastructure", "");
         public string InfrastructurePath => _applicationInfo.ApplicationBasePath;
         public string ApplicationPath => InfrastructurePath.ReplaceLast("Infrastructure", "Application");
         public string UnitTestPath => InfrastructurePath.Replace("src","test").ReplaceLast("Infrastructure", "UnitTest");
